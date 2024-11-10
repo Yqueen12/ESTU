@@ -1,22 +1,31 @@
-import  { useState } from 'react';
-import Navbar from './Navbar';
+import { useState } from 'react';
+import Navbar from "./Navbar.jsx";
 import "./admin.scss";
 
 const AdminDashboard = () => {
-  const [productName, setProductName] = useState('');
-  const [jobs, setJobs] = useState([]);
-  const [jobDescription, setJobDescription] = useState('');
+  const [jobData, setJobData] = useState({
+    tanggal: '',
+    jobNumber: '',
+    namaItem: '',
+    namaMesin: '',
+    jumlahDruk: ''
+  });
+  const [tableData, setTableData] = useState([]);
 
-  const handleAddProduct = () => {
-    // Logic untuk menambah produk ke backend
-    console.log(`Product Added: ${productName}`);
-    setProductName('');
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setJobData({ ...jobData, [name]: value });
   };
 
   const handleAddJob = () => {
-    const newJob = { jobDescription };
-    setJobs([...jobs, newJob]);
-    setJobDescription('');
+    setTableData([...tableData, { ...jobData, no: tableData.length + 1 }]);
+    setJobData({
+      tanggal: '',
+      jobNumber: '',
+      namaItem: '',
+      namaMesin: '',
+      jumlahDruk: ''
+    });
   };
 
   return (
@@ -25,31 +34,72 @@ const AdminDashboard = () => {
       <div className="admin-dashboard">
         <h2>Admin Dashboard</h2>
 
-        <div className="product-section">
-          <h3>Add New Product</h3>
-          <input
-            type="text"
-            placeholder="Product Name"
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
-          />
-          <button onClick={handleAddProduct}>Add Product</button>
-        </div>
-
-        <div className="job-section">
+        <div className="job-input-section">
           <h3>Job Input</h3>
           <input
             type="text"
-            placeholder="Job Description"
-            value={jobDescription}
-            onChange={(e) => setJobDescription(e.target.value)}
+            name="tanggal"
+            placeholder="Tanggal (e.g., Rabu/9/10/2024)"
+            value={jobData.tanggal}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="jobNumber"
+            placeholder="No. JOB"
+            value={jobData.jobNumber}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="namaItem"
+            placeholder="Nama Item"
+            value={jobData.namaItem}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="namaMesin"
+            placeholder="Nama Mesin (e.g., CD - 102)"
+            value={jobData.namaMesin}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="jumlahDruk"
+            placeholder="Jumlah Druk (e.g., 9000)"
+            value={jobData.jumlahDruk}
+            onChange={handleInputChange}
           />
           <button onClick={handleAddJob}>Add Job</button>
-          <ul>
-            {jobs.map((job, index) => (
-              <li key={index}>{job.jobDescription}</li>
-            ))}
-          </ul>
+        </div>
+
+        <div className="table-section">
+          <h3>Job Table</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Tanggal</th>
+                <th>No. JOB</th>
+                <th>Nama Item</th>
+                <th>Nama Mesin</th>
+                <th>Jumlah Druk</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tableData.map((data, index) => (
+                <tr key={index}>
+                  <td>{data.no}</td>
+                  <td>{data.tanggal}</td>
+                  <td>{data.jobNumber}</td>
+                  <td>{data.namaItem}</td>
+                  <td style={{ color: 'purple', fontWeight: 'bold' }}>{data.namaMesin}</td>
+                  <td>{data.jumlahDruk}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </>

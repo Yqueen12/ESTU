@@ -1,5 +1,5 @@
 import "./jadwalproduksi.scss";
-
+import Navbar from "./Navbar";
 const JadwalProduksi = () => {
   const data = [
     { no: 1, tanggal: "Rabu/9/10/2024", jobNo: "240001", namaItem: "Kardus Mentos", namaMesin: "CD - 102", jumlahDruk: "9.000" },
@@ -8,17 +8,9 @@ const JadwalProduksi = () => {
   ];
 
   return (
+    <>
+    <Navbar/>
     <div className="jadwal-produksi">
-      <header className="header">
-        <h1 className="logo">Estu</h1>
-        <nav className="nav">
-          <a href="#dashboard" className="nav-link">Dashboard</a>
-          <a href="#jadwal-produksi" className="nav-link active">Jadwal Produksi</a>
-          <a href="#laporan-hasil-produksi" className="nav-link">Laporan Hasil Produksi</a>
-          <button className="logout-button">Keluar</button>
-        </nav>
-      </header>
-
       <div className="content">
         <h2 className="title">Jadwal Produksi</h2>
         <table className="table">
@@ -49,6 +41,7 @@ const JadwalProduksi = () => {
         <button className="ambil-job-button">Ambil Job</button>
       </div>
     </div>
+    </>
   );
 };
 

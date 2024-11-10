@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./formproduksi.scss";
+import Navbar from "./Navbar";
 
 const FormProduksi = () => {
   const [tahapanProduksi, setTahapanProduksi] = useState("");
@@ -9,17 +10,9 @@ const FormProduksi = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="form-produksi">
-      <header className="header">
-        <h1 className="logo">Estu</h1>
-        <nav className="nav">
-          <a href="#dashboard" className="nav-link">Dashboard</a>
-          <a href="#jadwal-produksi" className="nav-link active">Jadwal Produksi</a>
-          <a href="#laporan-hasil-produksi" className="nav-link">Laporan Hasil Produksi</a>
-          <button className="logout-button">Keluar</button>
-        </nav>
-      </header>
-
       <div className="content">
         <div className="form">
           <div className="left-section">
@@ -55,6 +48,7 @@ const FormProduksi = () => {
         <button className="ambil-job-button">Ambil Job</button>
       </div>
     </div>
+    </>
   );
 };
 
